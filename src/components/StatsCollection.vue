@@ -9,11 +9,25 @@ const props = defineProps<{
 <template>
 <div class="stats-collection">
   <div v-for="stat in props.stats" :key="stat.name">
-    <ScoreStat :stat="stat" v-if="isScoreStatistics(stat)" />
+    <div>
+      <ScoreStat :stat="stat" v-if="isScoreStatistics(stat)" />
+    </div>
   </div>
 </div>
 </template>
 
+
 <style scoped>
-/* Add your styles here */
+.stats-collection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; /* Optional: for spacing between grid items */
+}
+.stats-collection div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 </style>

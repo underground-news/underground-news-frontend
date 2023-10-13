@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="article">
     <h1>{{ props.article.title }}</h1>
 
     <div class="card">
@@ -17,6 +17,9 @@ const props = defineProps<{
 </script>
 
 <style scoped>
-/* Add your styles here */
+.article {
+  padding: 3em;
+  max-width: 700px;
+}
 </style>
 ./models
