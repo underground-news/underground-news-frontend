@@ -1,6 +1,16 @@
-# Vue 3 + TypeScript + Vite
+# Underground News Frontend
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This repository contains the frontend for the Underground News project.
+It is written in Vue 3 and uses the Vite build tool.
+
+- **Project setup:**
+  ```shell
+  npm install
+  ```
+- **Compiles and hot-reloads for development**
+   ```shell
+   npm run dev
+   ```
 
 ## Recommended IDE Setup
 
