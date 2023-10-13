@@ -6,7 +6,7 @@ import { useArticleStore } from './articleStore'
 import Article from './components/Article.vue'
 import StatsCollection from './components/StatsCollection.vue'
 import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json'
-import { type ArticleContent, type ArticleScores } from './models'
+import { type ArticleContent, type ArticleScores, type ScoreStatistics } from './models'
 
 const article = ref<ArticleContent | null>(null)
 const stats = ref<Statistic[] | null>(null)
