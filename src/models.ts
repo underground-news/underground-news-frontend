@@ -9,6 +9,8 @@ export interface ArticleContent {
 
 export interface Statistic {
   name: string
+  description: string
+  handle: string
 }
 
 export function isScoreStatistics(statistics: Statistic): statistics is ScoreStatistics {
@@ -17,6 +19,8 @@ export function isScoreStatistics(statistics: Statistic): statistics is ScoreSta
 
 export interface ScoreStatistics extends Statistic {
   scores: { articleUrl: string; score: number }[]
+  minLabel: string
+  maxLabel: string
 }
 
 export interface ArticleScores {

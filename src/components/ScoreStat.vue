@@ -30,8 +30,8 @@ function showDropdown(url: string | null) {
     <div class="name">{{ props.stat.name }}</div>
     <div class="scale">
       <div class="labels">
-        <div>Left</div>
-        <div>Right</div>
+        <div>{{props.stat.minLabel }}</div>
+        <div>{{props.stat.maxLabel }}</div>
       </div>
 
       <div class="articles">
@@ -142,6 +142,9 @@ function showDropdown(url: string | null) {
 }
 .labels,
 .score-labels {
+  position: relative;
+  top: -0.5em;
+  font-size: 0.8em;
   display: flex;
   justify-content: space-between;
 }
@@ -167,7 +170,7 @@ function showDropdown(url: string | null) {
 }
 .favicon {
   display: block;
-  width: 20px;
+  width: 35px;
 }
 
 /* Add your styles here */
