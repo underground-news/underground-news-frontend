@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { type Statistic, isScoreStatistics } from '../models.js';
-import ScoreStat from './ScoreStat.vue';
+import { type ArticleScores } from '../models.js';
 const props = defineProps<{
-  stats: Statistic[]
+  stats: ArticleScores | null
 }>()
 </script>
 
 <template>
 <div class="stats-collection">
-  <div v-for="stat in props.stats" :key="stat.name">
-    <ScoreStat :stat="stat" v-if="isScoreStatistics(stat)" />
-  </div>
+  <ul>
+    <li v-for="[key, value] in Object.entries(props.stats|| {} as Record<string, unknown>)" :key="key">
+        {{ key }} - {{ value }}
+    </li>
+  </ul>
 </div>
 </template>
 
