@@ -6,15 +6,21 @@ import Article from './components/Article.vue'
 import StatsCollection from './components/StatsCollection.vue'
 import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json'
 import { type ArticleContent, type ArticleScores } from './models'
+import { useArticleStore } from './articleStore'
 
 const article = ref<ArticleContent | null>(null)
 const stats = ref<ArticleScores | null>(null)
 
+const articleStore = useArticleStore()
+
 async function getPageContent(url: string): Promise<ArticleContent> {
   // use fixture for now
   // todo: fetch from url
-  url // unused
-  return theSunBrexitStudentLoans
+  url // unused,
+  const newArticles =  theSunBrexitStudentLoans
+  articleStore.clear()
+  articleStore.add(newArticles)
+  return newArticles;
 }
 
 async function getStats(): Promise<ArticleScores> {

@@ -1,22 +1,13 @@
 [
     {
         "name": "Polititcal Bias",
+        "handle": "political_bias",
         "description": "This is a test description",
         "scores": [
-            {
-                "articleUrl": "https://www.nytimes.com/2019/10/23/us/politics/trump-impeachment.html",
-                "score": "3"
-            },
-            {
-                "articleUrl": "https://www.cnn.com/2019/10/23/politics/donald-trump-impeachment-inquiry/index.html",
-                "score": "1"
-            },
             {
                 "articleUrl": "https://www.thesun.co.uk/news/17643654/brexit-eu-student-loans-saving/",
                 "score": "4"
             }
-        ],
-        "minLabel": "Left",
-        "maxLabel": "Right"
+        ]
     }
 ]

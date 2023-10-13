@@ -16,8 +16,6 @@ export function isScoreStatistics(statistics: Statistic): statistics is ScoreSta
 
 export interface ScoreStatistics extends Statistic {
   scores: { articleUrl: string; score: number }[]
-  minLabel: string // label for the lowest score
-  maxLabel: string // label for the highest score
 }
 
 export interface ArticleScores {
