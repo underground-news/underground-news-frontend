@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { defineEmits, ref } from "vue";
 
-const url = ref("");
+const url = ref("https://www.thesun.co.uk/news/17643654/brexit-eu-student-loans-saving/");
 
 const emits = defineEmits<{
   (e: "url-entered", url: URL): void;

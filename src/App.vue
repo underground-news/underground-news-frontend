@@ -33,11 +33,13 @@ async function onUrlEntered(url: URL): Promise<void> {
 </script>
 
 <template>
-  <UrlInput @url-entered="onUrlEntered" />
+  <div class="container">
+    <UrlInput @url-entered="onUrlEntered" />
 
-  <Article v-if="article" :article="article" />
+    <StatsCollection v-if="stats" :stats="stats" />
 
-  <StatsCollection v-if="stats" :stats="stats" />
+    <Article v-if="article" :article="article" />
+  </div>
 </template>
 
 <style scoped>
@@ -53,5 +55,10 @@ async function onUrlEntered(url: URL): Promise<void> {
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 </style>
-./components/models
