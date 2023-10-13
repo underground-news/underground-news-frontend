@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import UrlInput from './components/UrlInput.vue';
+import UrlInput from './components/UrlInput.vue'
 
-import { ref } from 'vue';
-import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json';
-import { type ArticleContent } from './models';
-
-// interface ArticleContent {
-//   title: string
-//   content: string
-//   url: string
-//   favicon: string
-//   newsProvider: string
-// }
+import { ref } from 'vue'
+import Article from './components/Article.vue'
+import StatsCollection from './components/StatsCollection.vue'
+import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json'
+import theSunBrexitScores from './mocks/statistics-the-sun-brexit-student.json'
+import { type ArticleContent, type Statistic } from './models'
 
 const article = ref<ArticleContent | null>(null)
+const stats = ref<Statistic[] | null>(null)
 
 async function getPageContent(url: string): Promise<ArticleContent> {
   // use fixture for now
@@ -22,21 +18,26 @@ async function getPageContent(url: string): Promise<ArticleContent> {
   return theSunBrexitStudentLoans
 }
 
+async function getStats(): Promise<Statistic[]> {
+  // use fixture for now
+  return theSunBrexitScores as Statistic[]
+}
+
 async function onUrlEntered(url: URL): Promise<void> {
   const content = await getPageContent(url.toString())
   console.log(content)
   article.value = content
+
+  stats.value = await getStats()
 }
 </script>
 
 <template>
   <UrlInput @url-entered="onUrlEntered" />
 
-  <div v-if="article">
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.content }}</p>
-  </div>
-  <ArticleContent v-if="article" :article="article" />
+  <Article v-if="article" :article="article" />
+
+  <StatsCollection v-if="stats" :stats="stats" />
 </template>
 
 <style scoped>
