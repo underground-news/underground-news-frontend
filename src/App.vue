@@ -2,25 +2,43 @@
 import UrlInput from './components/UrlInput.vue'
 
 import { ref } from 'vue'
+import { useArticleStore } from './articleStore'
 import Article from './components/Article.vue'
 import StatsCollection from './components/StatsCollection.vue'
-import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json'
 import { type ArticleContent, type ArticleScores } from './models'
-import { useArticleStore } from './articleStore'
 
 const article = ref<ArticleContent | null>(null)
 const stats = ref<ArticleScores | null>(null)
 
 const articleStore = useArticleStore()
 
+const scrapperEndpoint = 'https://devstar9502-fwbtu76snq-oe.a.run.app'
+
+
 async function getPageContent(url: string): Promise<ArticleContent> {
-  // use fixture for now
-  // todo: fetch from url
-  url // unused,
-  const newArticles =  theSunBrexitStudentLoans
-  articleStore.clear()
-  articleStore.add(newArticles)
-  return newArticles;
+  // schema of the returned object
+  interface ScrapArticle {
+    title: string
+    text: string
+    url: string
+    date: number[] | null
+  }
+  const resp = await fetch(`${scrapperEndpoint}/read_article/${url}`)
+  return resp.json().then((data) => {
+    const scrapArticle = data as ScrapArticle
+    const url = new URL(scrapArticle.url)
+    const newArticle = {
+      title: scrapArticle.title,
+      content: scrapArticle.text,
+      url: scrapArticle.url,
+      favicon: url.origin + '/favicon.ico',
+      date: scrapArticle.date,
+      newsProvider: url.hostname
+    }
+    articleStore.clear()
+    articleStore.add(newArticle)
+    return newArticle
+  })
 }
 
 async function getStats(): Promise<ArticleScores> {

@@ -4,6 +4,7 @@ export interface ArticleContent {
   url: string
   favicon: string
   newsProvider: string
+  date: number[] | null
 }
 
 export interface Statistic {
@@ -36,7 +37,3 @@ export interface ArticleScores {
   Comparative_Analysis: number
 }
 
-// export { ArticleContent };
-// module.exports = {
-//   ArticleContent
-// };
