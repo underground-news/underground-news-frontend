@@ -1,39 +1,42 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import UrlInput from "./components/UrlInput.vue";
+import UrlInput from './components/UrlInput.vue';
 
-import theSunBrexitStudentLoans from "./fixtures/the-sun-brexit-student-loans.json";
+import { ref } from 'vue';
+import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json';
+import { type ArticleContent } from './models';
 
-interface ArticleContent {
-  title: string;
-  content: string;
-  url: string;
-}
+// interface ArticleContent {
+//   title: string
+//   content: string
+//   url: string
+//   favicon: string
+//   newsProvider: string
+// }
+
+const article = ref<ArticleContent | null>(null)
 
 async function getPageContent(url: string): Promise<ArticleContent> {
   // use fixture for now
   // todo: fetch from url
-  url; // unused
-  return theSunBrexitStudentLoans;
+  url // unused
+  return theSunBrexitStudentLoans
 }
 
-async function onUrlEntered(url: string): Promise<void> {
-  const content = await getPageContent(url);
-  console.log(content);
+async function onUrlEntered(url: URL): Promise<void> {
+  const content = await getPageContent(url.toString())
+  console.log(content)
+  article.value = content
 }
 </script>
 
 <template>
   <UrlInput @url-entered="onUrlEntered" />
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+
+  <div v-if="article">
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <ArticleContent v-if="article" :article="article" />
 </template>
 
 <style scoped>
@@ -50,3 +53,4 @@ async function onUrlEntered(url: string): Promise<void> {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
+./components/models
