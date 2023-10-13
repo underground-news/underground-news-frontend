@@ -5,11 +5,10 @@ import { ref } from 'vue'
 import Article from './components/Article.vue'
 import StatsCollection from './components/StatsCollection.vue'
 import theSunBrexitStudentLoans from './mocks/article-content-the-sun-brexit-student-loans.json'
-import theSunBrexitScores from './mocks/statistics-the-sun-brexit-student.json'
-import { type ArticleContent, type Statistic } from './models'
+import { type ArticleContent, type ArticleScores } from './models'
 
 const article = ref<ArticleContent | null>(null)
-const stats = ref<Statistic[] | null>(null)
+const stats = ref<ArticleScores | null>(null)
 
 async function getPageContent(url: string): Promise<ArticleContent> {
   // use fixture for now
@@ -18,16 +17,26 @@ async function getPageContent(url: string): Promise<ArticleContent> {
   return theSunBrexitStudentLoans
 }
 
-async function getStats(): Promise<Statistic[]> {
+async function getStats(): Promise<ArticleScores> {
   // use fixture for now
-  return theSunBrexitScores as Statistic[]
+    const body = JSON.stringify({ article1: theSunBrexitStudentLoans.content })
+    console.log(body)
+    const response = await fetch("https://promptserver-s5ngncfpya-oe.a.run.app/score_json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body,
+    })
+    const data = await response.json()
+    const scores = data.data as ArticleScores
+    return scores
 }
 
 async function onUrlEntered(url: URL): Promise<void> {
   const content = await getPageContent(url.toString())
   console.log(content)
   article.value = content
-
   stats.value = await getStats()
 }
 </script>
